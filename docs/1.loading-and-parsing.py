@@ -7,6 +7,7 @@ from docling.document_converter import DocumentConverter, PdfFormatOption
 
 # Global document path - the only document we'll use
 DOCUMENT_PATH = "documents/BHE_991.pdf"
+DOCUMENT_PATH = "documents/TMUS_Q225_992.pdf"
 
 
 # Example 1: Basic Document Loading
@@ -196,6 +197,8 @@ def show_table_basics(document):
 
     print("\n=== Table Access Demo ===\n")
 
+    md_list = []
+
     for i, table in enumerate(document.tables, 1):
         if table.prov and len(table.prov) > 0:
             page_no = table.prov[0].page_no  # Already 1-based, no conversion needed
@@ -204,14 +207,22 @@ def show_table_basics(document):
             # Show table can be converted to DataFrame
             try:
                 df = table.export_to_dataframe()
+                md_list.append(table.export_to_markdown(doc=document))
                 print(f"Shape: {df.shape}, First cell: '{df.iloc[0, 0]}'")
             except Exception as e:
                 print(f"  Export error: {e}")
 
+    for num, md in enumerate(md_list, 1):
+        header = f"= Table {num} ="
+        print()
+        print("-" * len(header))
+        print(f"{header}")
+        print("-" * len(header), f"\n\n{md}")
+
 
 # Example usage and testing
 if __name__ == "__main__":
-    print("Docling Pipeline Examples")
+    print("\n" + "=" * 50)
     print(f"Processing document: {DOCUMENT_PATH}")
     print("=" * 50)
 
