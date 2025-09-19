@@ -8,6 +8,7 @@ from docling.document_converter import DocumentConverter, PdfFormatOption
 # Global document path - the only document we'll use
 DOCUMENT_PATH = "documents/BHE_991.pdf"
 DOCUMENT_PATH = "documents/TMUS_Q225_992.pdf"
+DOCUMENT_PATH = "documents/TMUS_992_Q423.pdf"
 
 
 # Example 1: Basic Document Loading
